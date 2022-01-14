@@ -1,0 +1,84 @@
+<mvc:View
+    controllerName="com.miproyectodest.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table">
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <VBox >
+                            <table:Table 
+                                rows = "{path: '/Orders'}"
+                                visibleRowCount="7">
+                                <table:extension>
+                                    <OverflowToolbar >
+                                        <Title text="OData with NorthWind" />
+                                    </OverflowToolbar>
+                                </table:extension>
+                                <table:columns>
+                                    <table:Column >
+                                        <Label text="Order ID" />
+                                        <table:template>
+                                            <Text text="{OrderID}" />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column >
+                                        <Label text="ShipCity"/>
+                                        <table:template>
+                                            <Text text="{ShipCity}"  />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column hAlign="End">
+                                        <Label text="Employee ID"/>
+                                        <table:template>
+                                            <Text text="{EmployeeID}"  />
+                                        </table:template>
+                                    </table:Column>
+                                </table:columns>
+                            </table:Table>
+                        
+                            <table:Table 
+                                rows = "{embModel>/ZFLCDS_C_EMB}"
+                                visibleRowCount="7">
+                                <table:extension>
+                                    <OverflowToolbar >
+                                        <Title text="OData Basic Auth" />
+                                    </OverflowToolbar>
+                                </table:extension>
+                                <table:columns>
+                                    <table:Column >
+                                        <Label text="Matricula" />
+                                        <table:template>
+                                            <Text text="{embModel>Matricula}" />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column >
+                                        <Label text="Codigo Matricula"/>
+                                        <table:template>
+                                            <Text text="{embModel>Cod_Matricula}"  />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column >
+                                        <Label text="Nombre Ep"/>
+                                        <table:template>
+                                            <Text text="{embModel>NombreEp}"  />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column hAlign="End">
+                                        <Label text="Cbod"/>
+                                        <table:template>
+                                            <Text text="{embModel>Cbod}"  />
+                                        </table:template>
+                                    </table:Column>
+                                </table:columns>
+                            </table:Table>
+                        </VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

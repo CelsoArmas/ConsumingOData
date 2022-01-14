@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<service xml:base="https://gwaas-za65febe27.br1.hana.ondemand.com:443/odata/SAP/ZFLCDS_C_EMB_CDS;v=1/" xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gp="http://www.sap.com/Protocols/SAPData/GenericPlayer" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" xmlns:ux="http://www.sap.com/Protocols/OData4SAP/UX">
+    <workspace>
+        <atom:title type="text">Data</atom:title>
+        <collection href="ZFLCDS_C_EMB" sap:content-version="1" sap:creatable="false" sap:updatable="false" sap:deletable="false">
+            <atom:title type="text">ZFLCDS_C_EMB</atom:title>
+            <sap:member-title type="text">ZFLCDS_C_EMBType</sap:member-title>
+        </collection>
+    </workspace>
+    <link rel="self" href="https://gwaas-za65febe27.br1.hana.ondemand.com:443/odata/SAP/ZFLCDS_C_EMB_CDS;v=1/"></link>
+    <link rel="latest-version" href="https://gwaas-za65febe27.br1.hana.ondemand.com:443/odata/SAP/ZFLCDS_C_EMB_CDS;v=1/"></link>
+</service>

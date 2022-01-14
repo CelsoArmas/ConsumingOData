@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: PruebaDest
+description: Fiori elements app
+version: 0.0.1
+modules:
+- name: PruebaDest-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: PruebaDest-dest-srv
+    parameters:
+      content-target: true
+  - name: PruebaDest-repo-host
+    parameters:
+      service-key:
+        name: PruebaDest-repo-host-key
+  - name: PruebaDest-uaa
+    parameters:
+      service-key:
+        name: PruebaDest-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: PruebaDest_repo_host
+          ServiceInstanceName: PruebaDest-html5-srv
+          ServiceKeyName: PruebaDest-repo-host-key
+          sap.cloud.service: PruebaDest
+        - Authentication: OAuth2UserTokenExchange
+          Name: PruebaDest_uaa
+          ServiceInstanceName: PruebaDest-xsuaa-srv
+          ServiceKeyName: PruebaDest-uaa-key
+          sap.cloud.service: PruebaDest
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: PruebaDest-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: PruebaDest-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - commiproyectodest.zip
+      name: commiproyectodest
+      target-path: resources/
+- name: commiproyectodest
+  type: html5
+  path: miproyectodest
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: PruebaDest-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: PruebaDest-xsuaa-srv
+    service-plan: application
+- name: PruebaDest-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: PruebaDest-dest-srv
+    service-plan: lite
+- name: PruebaDest-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: PruebaDest-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
